@@ -1,0 +1,20 @@
+<h3><a href="<?php echo $this->gallery['link']; ?>"><?php echo $this->gallery['title']; ?></a> <small class="date">[<?php echo Date::parse('F Y', $this->gallery['datim']);?>]</small></h3>
+
+
+
+<?php if ($this->gallery['details']) echo '<p class="details">'.$this->gallery['details'].'</p>'; ?>
+
+
+<?php if (array_key_exists('images', $this->gallery)): ?>
+<ul class="image_list">
+    <?php foreach($this->gallery['images'] as $img): ?>
+        <li id="<?php echo $img['cssId']; ?>" class="<?php echo $img['cssClass']; ?>">
+            <a <?php echo $img['attr_title']; ?>data-lightbox="lb<?php echo $this->gallery['id']; ?>" href="<?php echo Image::get($img['path'], 800, 800, 'box'); ?>">
+                <img src="<?php echo Image::get($img['path'], 164, 164); ?>" />
+            </a>
+        </li>
+    <?php endforeach; ?>
+</ul>
+<?php endif; ?>
+
+<?php echo $this->pagination; ?>

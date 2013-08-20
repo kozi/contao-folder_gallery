@@ -1,0 +1,30 @@
+folder gallery
+
+Name und Root-Verzeichnis
+-- Nur Verzeichnisse mit Bildern einfügen
+-- Infos aus den Bildern initial auslesen
+
+tl_folder_gallery_category
+id
+tstamp
+title
+root_folder
+
+tl_folder_gallery
+id
+pid
+tstamp
+title
+alias
+details
+folder
+poster_image
+
+
+tl_module
+
+folder_gallery ID
+folder_gallery_images_pp
+folder_gallery_galleries_pp
+folder_gallery_template_overview
+folder_gallery_template_gallery

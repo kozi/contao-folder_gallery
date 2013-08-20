@@ -1,0 +1,15 @@
+<ul class="category_list">
+<?php foreach($this->galleries as $gal): ?>
+    <li style="background-image:url('<?php echo Image::get($gal['poster_image'], 256, 192); ?>');" id="<?php echo $gal['cssId']; ?>" class="<?php echo $gal['cssClass']; ?>">
+        <a class="link" href="<?php echo $gal['link']; ?>" style="width:256px;height:192px;">
+            <div class="meta">
+                <h4 class="title"><?php echo $gal['title']; ?></h4>
+                <span class="date"><?php echo Date::parse ('F Y', $gal['datim']); ?></span>
+            </div>
+        </a>
+    </li>
+<?php endforeach; ?>
+</ul>
+
+<?php echo $this->pagination;; ?>
+
