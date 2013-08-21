@@ -13,13 +13,11 @@
  * @filesource
  */
 
-
-
 $GLOBALS['TL_DCA']['tl_module']['palettes']['folder_gallery'] = '{title_legend},name,headline,type;
     {folder_gallery_legend},folder_gallery_category,
     folder_gallery_category_template,folder_gallery_gallery_template,
     folder_gallery_category_pp,folder_gallery_gallery_pp,
-    folder_gallery_gallery_limit,folder_gallery_category_limit,
+    folder_gallery_category_limit,folder_gallery_gallery_limit,
     folder_gallery_category_order,folder_gallery_gallery_order;
     {redirect_legend},jumpTo;';
 
