@@ -148,7 +148,7 @@ $GLOBALS['TL_DCA']['tl_folder_gallery'] = array(
             'flag'                    => 8,
             'inputType'               => 'text',
             'eval'                    => array('mandatory' => true, 'datepicker'=>true, 'rgxp'=>'date', 'tl_class'=>'w50 wizard'),
-            'sql'                     => "int(10) unsigned NOT NULL default '0'",
+            'sql'                     => "varchar(11) NOT NULL default ''"
         ),
         'details' => array
         (
