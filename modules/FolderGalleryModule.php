@@ -97,9 +97,9 @@ class FolderGalleryModule extends Module {
 
             $imgObj                  = \FilesModel::findByPk($gallery['poster_image']);
             $images                  = self::getImagesFromGallery($gallery);
-
-            if (count($images) > 0) {
-                $images_rand_index       = mt_rand(0, (count($images)-1));
+            $imgCount                = count($images);
+            if ($imgCount > 0) {
+                $images_rand_index       = mt_rand(0, ($imgCount-1));
                 $gallery['images']       = $images;
                 $gallery['poster_image'] = ($imgObj !== null) ? $imgObj->path : $images[$images_rand_index]['path'];
             }
