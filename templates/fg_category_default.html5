@@ -11,5 +11,7 @@
 <?php endforeach; ?>
 </ul>
 
-<?php echo $this->pagination;; ?>
+<?php echo $this->pagination; ?>
+
+
 

@@ -2,11 +2,11 @@
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2013 Leo Feyer
+ * Copyright (C) 2005-2014 Leo Feyer
  *
  *
  * PHP version 5
- * @copyright  Martin Kozianka 2013 <http://kozianka.de/>
+ * @copyright  Martin Kozianka 2013-2014 <http://kozianka.de/>
  * @author     Martin Kozianka <http://kozianka.de/>
  * @package    folder_gallery
  * @license    LGPL
@@ -108,7 +108,7 @@ $GLOBALS['TL_DCA']['tl_folder_gallery_category'] = array(
             'flag'                    => 4,
             'inputType'               => 'fileTree',
             'eval'                    => array('mandatory'=>true, 'fieldType'=>'radio', 'files' => false),
-            'sql'                     => "varchar(255) NOT NULL default ''",
+            'sql'                     => "binary(16) NULL",
         ),
 
     ) //fields
@@ -122,27 +122,14 @@ class tl_folder_gallery_category extends Backend {
         $this->import('BackendUser', 'User');
     }
 
-
-
     public function labelCallback($row, $label, DataContainer $dc, $args = null) {
         if ($args === null) {
             return $label;
         }
-
-        $result = $this->Database->prepare('SELECT name, path FROM tl_files WHERE id = ?')
-            ->execute($row['root_folder']);
-
-        if ($result->numRows === 1) {
-            $fileRow  = $result->row();
-            $args[1]  = $fileRow['path'];
-        }
-
+        $objFile  = \FilesModel::findByUuid($row['root_folder']);
+        $args[1]  = ($objFile !== null) ? $objFile->path : $args[1];
         return $args;
     }
 
 }
-
-
-
-
 

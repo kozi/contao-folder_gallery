@@ -2,11 +2,11 @@
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2013 Leo Feyer
+ * Copyright (C) 2013-2014 Leo Feyer
  *
  *
  * PHP version 5
- * @copyright  Martin Kozianka 2013 <http://kozianka.de/>
+ * @copyright  Martin Kozianka 2013-2014 <http://kozianka.de/>
  * @author     Martin Kozianka <http://kozianka.de/>
  * @package    folder_gallery
  * @license    LGPL
@@ -14,7 +14,8 @@
  */
 
 class FolderGalleryModule extends Module {
-    private static $fileTypes  = " AND (tl_files.extension = 'png' OR tl_files.extension = 'jpg' OR tl_files.extension = 'jpeg' OR tl_files.extension = 'gif')";
+    private static $fileTypes     = " (tl_files.extension = 'png' OR tl_files.extension = 'jpg' OR tl_files.extension = 'jpeg' OR tl_files.extension = 'gif')";
+    private static $filesInFolder = " tl_files.type='file' AND tl_files.path LIKE ? AND tl_files.path NOT LIKE ?";
     protected $strTemplate     = 'mod_folder_gallery';
     private   $jumpToRow       = null;
 
@@ -53,6 +54,7 @@ class FolderGalleryModule extends Module {
     }
 
     private function categoryView() {
+
         $objTemplate   = new \FrontendTemplate($this->folder_gallery_category_template);
         $id            = 'page_fgc'.$this->id;
         $this->page    = \Input::get($id) ?: 0;
@@ -95,7 +97,7 @@ class FolderGalleryModule extends Module {
             $gallery['cssId']        = 'gallery'.$gallery['id'];
             $gallery['cssClass']     = (($i %2 === 1) ? 'odd' : 'even').(($i == 0) ? ' first':'');
 
-            $imgObj                  = \FilesModel::findByPk($gallery['poster_image']);
+            $imgObj                  = \FilesModel::findByUuid($gallery['poster_image']);
             $images                  = self::getImagesFromGallery($gallery);
             $imgCount                = count($images);
             if ($imgCount > 0) {
@@ -133,7 +135,7 @@ class FolderGalleryModule extends Module {
         $gallery          = $result->row();
         $gallery['date']  = date($GLOBALS['TL_CONFIG']['dateFormat'], $gallery['datim']);
         $gallery['link']  = $this->generateFrontendUrl($this->jumpToRow, '/gallery/'.$gallery['alias']);
-        $imgObj           = \FilesModel::findByPk($gallery['poster_image']);
+        $imgObj           = \FilesModel::findByUuid($gallery['poster_image']);
 
 
         $orderBy    = str_replace(array('_desc', '_asc','rand'), array(' DESC',' ASC','RAND()'),
@@ -141,10 +143,12 @@ class FolderGalleryModule extends Module {
         $offset     = ($this->page === 0) ? 0 : (($this->page-1) * $this->folder_gallery_gallery_pp);
         $total      = 0;
 
-        $result = $this->Database->prepare('SELECT COUNT(*) AS count FROM tl_files WHERE tl_files.pid = ?'.static::$fileTypes)
-            ->execute($gallery['folder']);
-        if ($result->numRows === 1) {
-            $total = $result->count;
+
+
+        $arrOptions = array('column' => array(self::$filesInFolder.' AND '.self::$fileTypes));
+        $objChild   = \FilesModel::findMultipleFilesByFolder($gallery['folder'], $arrOptions);
+        if ($objChild !== null) {
+            $total = $objChild->count();
         }
 
         // Add the pagination menu
@@ -182,29 +186,27 @@ class FolderGalleryModule extends Module {
 		    'limit'  => $limit,
             'offset' => $offset,
             'order'  => $sorting,
-            'column' => array("tl_files.pid = ?".self::$fileTypes)
+            'column' => array(self::$filesInFolder.' AND '.self::$fileTypes)
         );
+        $objChild = \FilesModel::findMultipleFilesByFolder($gallery['folder'], $arrOptions);
 
-        $objChild = \FilesModel::findBy('pid', $gallery['folder'], $arrOptions);
         $images   = array();
         if ($objChild === null) {
             return $images;
         }
         $i = 0;
         while ($objChild->next()) {
-            if ($objChild->type === 'file') {
-                $objFile = new \File($objChild->path, true);
-                if ($objFile->isGdImage) {
-                    $img = array(
-                        'cssId'      => 'image'.$i,
-                        'cssClass'   => ($i %2 === 0) ? 'odd' : 'even',
-                        'link'       => '',
-                        'path'       => $objChild->path,
-                        'attr_title' => '', // TODO title from metadata
-                    );
-                    $images[] = $img;
-                    $i++;
-                }
+            $objFile = new \File($objChild->path, true);
+            if ($objFile->isGdImage) {
+                $img = array(
+                    'cssId'      => 'image'.$i,
+                    'cssClass'   => ($i %2 === 0) ? 'odd' : 'even',
+                    'link'       => '',
+                    'path'       => $objChild->path,
+                    'attr_title' => '', // TODO title from metadata
+                );
+                $images[] = $img;
+                $i++;
             }
         }
         return $images;

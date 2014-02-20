@@ -2,11 +2,11 @@
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2013 Leo Feyer
+ * Copyright (C) 2013-2014 Leo Feyer
  *
  *
  * PHP version 5
- * @copyright  Martin Kozianka 2013 <http://kozianka.de/>
+ * @copyright  Martin Kozianka 2013-2014 <http://kozianka.de/>
  * @author     Martin Kozianka <http://kozianka.de/>
  * @package    folder_gallery
  * @license    LGPL
@@ -111,10 +111,14 @@ $GLOBALS['TL_DCA']['tl_folder_gallery'] = array(
         'folder' => array
         (
             'label'                   => &$GLOBALS['TL_LANG']['tl_folder_gallery']['folder'],
-            'inputType'               => 'select',
-            'foreignKey'              => 'tl_files.path',
-            'eval'                    => array('mandatory'=>false, 'readonly' => true, 'tl_class'=>'w50', 'disabled' => true),
+            'inputType'               => 'text',
+            'eval'                    => array('mandatory'=>false, 'readonly' => true, 'tl_class'=>'long', 'disabled' => true),
             'sql'                     => "varchar(255) NOT NULL default ''",
+        ),
+        'uuid' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG']['tl_folder_gallery']['uuid'],
+            'sql'                     => "binary(16) NULL",
         ),
         'title' => array
         (
@@ -167,7 +171,7 @@ $GLOBALS['TL_DCA']['tl_folder_gallery'] = array(
             'flag'                    => 4,
             'inputType'               => 'fileTree',
             'eval'                    => array('mandatory'=>false, 'fieldType'=>'radio', 'files' => true, 'extensions' => 'png,jpg,jpeg,gif'),
-            'sql'                     => "varchar(255) NOT NULL default ''",
+            'sql'                     => "binary(16) NULL",
         ),
 
     ) //fields
@@ -175,6 +179,7 @@ $GLOBALS['TL_DCA']['tl_folder_gallery'] = array(
 );
 
 class tl_folder_gallery extends Backend {
+    private $root_folder = null;
 
     public function __construct() {
         parent::__construct();
@@ -184,15 +189,21 @@ class tl_folder_gallery extends Backend {
     public function labelCallback($row, $label, DataContainer $dc, $args = null) {
 
         $poster_path = 'system/modules/folder_gallery/assets/poster_default.png';
-        if($row['poster_image'] !== '') {
-            $imgObj      = \FilesModel::findByPk($row['poster_image']);
-            $poster_path = $imgObj->path;
+        $objFile     = \FilesModel::findByUuid($row['poster_image']);
+        if($objFile !== null) {
+            $poster_path = $objFile->path;
         }
+
         $args[0]    = sprintf('<img src="%s">', Image::get($poster_path, 64, 48, 'center_center'));
         $args[1]    = sprintf('%s <br><small>[%s]</small>', $row['title'], $row['alias']);
 
-        $folderObj  = \FilesModel::findByPk($row['folder']);
-        $args[2]    = $folderObj->path;
+
+        if ($this->root_folder === null) {
+            $catObj  = \FolderGalleryCategoryModel::findByPk($row['pid']);
+            $rootObj = \FilesModel::findByUuid($catObj->root_folder);
+            $this->root_folder = $rootObj->path;
+        }
+        $args[2]    = str_replace($this->root_folder, '&hellip;', $row['folder']);
 
         $args[3]    = Date::parse('d.m.Y', $row['datim']);
 

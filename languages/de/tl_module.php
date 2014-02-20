@@ -2,11 +2,11 @@
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2013 Leo Feyer
+ * Copyright (C) 2013-2014 Leo Feyer
  *
  *
  * PHP version 5
- * @copyright  Martin Kozianka 2013 <http://kozianka.de/>
+ * @copyright  Martin Kozianka 2013-2014 <http://kozianka.de/>
  * @author     Martin Kozianka <http://kozianka.de/>
  * @package    folder_gallery
  * @license    LGPL
@@ -28,11 +28,11 @@ $GLOBALS['TL_LANG']['tl_module']['folder_gallery_gallery_order']         = array
 $GLOBALS['TL_LANG']['tl_module']['folder_gallery_legend']                = 'Verzeichnis Galerie';
 
 $GLOBALS['TL_LANG']['tl_module']['folder_gallery_category_order_options'] = array(
-    'title_asc'  => 'Nach Name (A-Z)',
-    'title_desc' => 'Nach Name (Z-A)',
-    'datim_asc'  => 'Nach Datum aufsteigend',
-    'datim_desc' => 'Nach Datum absteigend',
-    'rand'       => 'Zufällig',
+    'title_asc'      => 'Nach Name (A-Z)',
+    'title_desc'     => 'Nach Name (Z-A)',
+    '(datim+0)_asc'  => 'Nach Datum aufsteigend',
+    '(datim+0)_desc' => 'Nach Datum absteigend',
+    'rand'           => 'Zufällig',
 );
 
 $GLOBALS['TL_LANG']['tl_module']['folder_gallery_gallery_order_options'] = array(

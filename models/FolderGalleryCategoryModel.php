@@ -2,7 +2,7 @@
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2013-2014 Leo Feyer
+ * Copyright (C) 2005-2014 Leo Feyer
  *
  *
  * PHP version 5
@@ -13,4 +13,7 @@
  * @filesource
  */
 
-$GLOBALS['TL_LANG']['CTE']['folder_gallery']          = array('Verzeichnis Galerie', 'Verzeichnis Galerie');
+class FolderGalleryCategoryModel extends \Model {
+    protected static $strTable = 'tl_folder_gallery_category';
+
+}
