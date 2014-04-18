@@ -127,7 +127,7 @@ $GLOBALS['TL_DCA']['tl_folder_gallery'] = array(
             'search'                  => true,
             'sorting'                 => true,
             'inputType'               => 'text',
-            'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50'),
+            'eval'                    => array('mandatory'=>true, 'tl_class'=>'long'),
             'sql'                     => "varchar(255) NOT NULL default ''",
         ),
         'alias' => array
@@ -159,7 +159,7 @@ $GLOBALS['TL_DCA']['tl_folder_gallery'] = array(
             'label'                   => &$GLOBALS['TL_LANG']['tl_folder_gallery']['details'],
             'exclude'                 => true,
             'inputType'               => 'textarea',
-            'eval'		              => array('style' => ' height:64px;', 'mandatory'=>false),
+            'eval'		              => array('style' => 'height:64px;', 'mandatory'=>false),
             'sql'                     => "text NULL",
         ),
         'poster_image' => array

@@ -14,10 +14,11 @@
  */
 
 class FolderGalleryModule extends Module {
+    public static $sorting        = array('title_asc', 'title_desc', 'datim_asc', 'datim_desc', 'rand');
     private static $fileTypes     = " (tl_files.extension = 'png' OR tl_files.extension = 'jpg' OR tl_files.extension = 'jpeg' OR tl_files.extension = 'gif')";
     private static $filesInFolder = " tl_files.type='file' AND tl_files.path LIKE ? AND tl_files.path NOT LIKE ?";
-    protected $strTemplate     = 'mod_folder_gallery';
-    private   $jumpToRow       = null;
+    protected $strTemplate        = 'mod_folder_gallery';
+    private   $jumpToRow          = null;
 
     public function generate() {
         global $objPage;
@@ -72,9 +73,12 @@ class FolderGalleryModule extends Module {
             $this->folder_gallery_category_pp, $GLOBALS['TL_CONFIG']['maxPaginationLinks'], $id);
         $objTemplate->pagination = $objPagination->generate("\n  ");
 
-        $orderBy = ' ORDER BY '.str_replace(array('_desc', '_asc','rand'), array(' DESC',' ASC','RAND()'),
-            $this->folder_gallery_category_order);
 
+        $order   = $this->folder_gallery_category_order;
+        $order   = str_replace('datim', '(datim+0)', $order);
+        $order   = str_replace(array('_desc', '_asc','rand'), array(' DESC',' ASC','RAND()'), $order);
+        $order   = str_replace(array('_desc', '_asc','rand'), array(' DESC',' ASC','RAND()'), $order);
+        $orderBy = ' ORDER BY '.$order;
 
         $limit = $this->folder_gallery_category_pp;
         if ($this->folder_gallery_category_limit != 0 && $this->folder_gallery_category_limit < $this->folder_gallery_category_pp) {
@@ -82,7 +86,6 @@ class FolderGalleryModule extends Module {
             $limit  = $this->folder_gallery_category_limit;
             $offset = 0;
         }
-
 
         $result = $this->Database->prepare('SELECT * FROM tl_folder_gallery WHERE pid = ?'.$orderBy)
             ->limit($limit, $offset)
@@ -138,8 +141,11 @@ class FolderGalleryModule extends Module {
         $imgObj           = \FilesModel::findByUuid($gallery['poster_image']);
 
 
-        $orderBy    = str_replace(array('_desc', '_asc','rand'), array(' DESC',' ASC','RAND()'),
-            $this->folder_gallery_gallery_order);
+        $order   = $this->folder_gallery_gallery_order;
+        $order   = str_replace('datim', 'tstamp', $order);
+        $orderBy = str_replace(array('_desc', '_asc','rand'), array(' DESC',' ASC','RAND()'), $order);
+
+
         $offset     = ($this->page === 0) ? 0 : (($this->page-1) * $this->folder_gallery_gallery_pp);
         $total      = 0;
 

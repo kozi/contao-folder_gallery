@@ -92,7 +92,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['folder_gallery_category_order'] = arr
     'exclude'                 => true,
     'inputType'               => 'select',
     'default'                 => 'name DESC',
-    'options'                 => &$GLOBALS['TL_LANG']['tl_module']['folder_gallery_category_order_options'],
+    'options_callback'        => array('tl_module_folder_gallery', 'getSortingOptions'),
     'eval'                    => array('mandatory' => true, 'tl_class'=>'w50'),
     'sql'                     => "varchar(255) NOT NULL default ''",
 );
@@ -102,7 +102,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['folder_gallery_gallery_order'] = arra
     'exclude'                 => true,
     'inputType'               => 'select',
     'default'                 => 'name DESC',
-    'options'                 => &$GLOBALS['TL_LANG']['tl_module']['folder_gallery_gallery_order_options'],
+    'options_callback'        => array('tl_module_folder_gallery', 'getSortingOptions'),
     'eval'                    => array('mandatory' => true, 'tl_class'=>'w50'),
     'sql'                     => "varchar(255) NOT NULL default ''",
 );
@@ -115,6 +115,14 @@ class tl_module_folder_gallery extends Backend {
 
     public function getFolderGalleryTemplatesGallery(DataContainer $dc) {
         return Controller::getTemplateGroup('fg_gallery_');
+    }
+
+    public function getSortingOptions(DataContainer $dc) {
+        $options = array();
+        foreach (FolderGalleryModule::$sorting as $key) {
+            $options[$key] = $GLOBALS['TL_LANG']['tl_module']['folder_gallery_sorting'][$key];
+        }
+        return $options;
     }
 
 }
