@@ -188,10 +188,12 @@ class FolderGalleryModule extends Module {
 
     public static function getImagesFromGallery($gallery, $sorting = 'name ASC', $limit = 0, $offset = 0) {
 
+
+
         $arrOptions = array(
 		    'limit'  => $limit,
             'offset' => $offset,
-            'order'  => $sorting,
+            'order'  => str_replace('title', 'name', $sorting),
             'column' => array(self::$filesInFolder.' AND '.self::$fileTypes)
         );
         $objChild = \FilesModel::findMultipleFilesByFolder($gallery['folder'], $arrOptions);
