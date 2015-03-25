@@ -1,0 +1,44 @@
+{
+    "name": "martin-kozianka/folder-gallery",
+    "description": "folder-gallery for contao",
+    "keywords": [
+        "contao",
+        "gallery",
+        "image",
+        "images",
+        "frontend"
+    ],
+    "type": "contao-module",
+    "license": "LGPL-3.0+",
+    "authors": [
+        {
+            "name": "Martin Kozianka",
+            "email": "martin@kozianka.de",
+            "homepage": "http://kozianka.de",
+            "role": "Developer"
+        }
+    ],  
+    "support": {
+        "email": "martin@kozianka.de",
+        "issues": "https://github.com/kozi/folder-gallery/issues",
+        "irc": "irc://irc.freenode.org/contao.dev",
+        "source": "https://github.com/kozi/folder-gallery"
+    },
+    "require": {
+        "php": ">=5.5",
+        "contao/core": ">=3.4",
+        "contao-community-alliance/composer-plugin": "~2"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "extra": {
+        "contao": {
+            "sources": {
+                "contao": "system/modules/folder-gallery"
+            }
+        }
+    },
+    "config": {
+        "component-dir": "../assets/components"
+    }
+}
