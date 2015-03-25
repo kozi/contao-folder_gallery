@@ -188,7 +188,7 @@ class tl_folder_gallery extends Backend {
 
     public function labelCallback($row, $label, DataContainer $dc, $args = null) {
 
-        $poster_path = 'system/modules/folder_gallery/assets/poster_default.png';
+        $poster_path = 'system/modules/folder-gallery/assets/poster_default.png';
         $objFile     = \FilesModel::findByUuid($row['poster_image']);
         if($objFile !== null) {
             $poster_path = $objFile->path;

@@ -15,16 +15,16 @@
 
 ClassLoader::addClasses(array
 (
-    'FolderGallery'               => 'system/modules/folder_gallery/classes/FolderGallery.php',
-	'FolderGalleryModule'         => 'system/modules/folder_gallery/modules/FolderGalleryModule.php',
+    'FolderGallery'               => 'system/modules/folder-gallery/classes/FolderGallery.php',
+	'FolderGalleryModule'         => 'system/modules/folder-gallery/modules/FolderGalleryModule.php',
 
-    'FolderGalleryCategoryModel'  => 'system/modules/folder_gallery/models/FolderGalleryCategoryModel.php',
-    'FolderGalleryModel'          => 'system/modules/folder_gallery/models/FolderGalleryModel.php',
+    'FolderGalleryCategoryModel'  => 'system/modules/folder-gallery/models/FolderGalleryCategoryModel.php',
+    'FolderGalleryModel'          => 'system/modules/folder-gallery/models/FolderGalleryModel.php',
 ));
 
 TemplateLoader::addFiles(array
 (
-    'mod_folder_gallery'          => 'system/modules/folder_gallery/templates',
-    'fg_category_default'         => 'system/modules/folder_gallery/templates',
-    'fg_gallery_default'          => 'system/modules/folder_gallery/templates',
+    'mod_folder_gallery'          => 'system/modules/folder-gallery/templates',
+    'fg_category_default'         => 'system/modules/folder-gallery/templates',
+    'fg_gallery_default'          => 'system/modules/folder-gallery/templates',
 ));
