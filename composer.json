@@ -25,10 +25,12 @@
         "source": "https://github.com/kozi/folder-gallery"
     },
     "require": {
-        "php": ">=5.5",
-        "contao/core": ">=3.4",
         "contao-community-alliance/composer-plugin": "~2"
     },
+    "require-dev": {
+        "php": ">=5.5",
+        "contao/core": ">=3.4"
+    },    
     "minimum-stability": "dev",
     "prefer-stable": true,
     "extra": {
