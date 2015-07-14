@@ -13,11 +13,10 @@
  * @filesource
  */
 
-
 $GLOBALS['FE_MOD']['miscellaneous']['folder_gallery']        = 'FolderGalleryModule';
 
 $GLOBALS['BE_MOD']['content']['folder_gallery']              = array(
-            'icon'       => 'system/modules/folder-gallery/assets/pictures.png',
+            'icon'       => 'system/modules/folder_gallery/assets/pictures.png',
             'tables'     => array('tl_folder_gallery_category', 'tl_folder_gallery'),
             'sync'       => array('FolderGallery', 'syncGalleryCategory'),
 );

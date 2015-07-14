@@ -1,6 +1,6 @@
 {
-    "name": "martin-kozianka/folder-gallery",
-    "description": "folder-gallery for contao",
+    "name": "martin-kozianka/contao-folder_gallery",
+    "description": "folder_gallery for contao",
     "keywords": [
         "contao",
         "gallery",
@@ -20,14 +20,12 @@
     ],  
     "support": {
         "email": "martin@kozianka.de",
-        "issues": "https://github.com/kozi/folder-gallery/issues",
+        "issues": "https://github.com/kozi/contao-folder_gallery/issues",
         "irc": "irc://irc.freenode.org/contao.dev",
-        "source": "https://github.com/kozi/folder-gallery"
+        "source": "https://github.com/kozi/contao-folder_gallery"
     },
     "require": {
-        "contao-community-alliance/composer-plugin": "~2"
-    },
-    "require-dev": {
+        "contao-community-alliance/composer-plugin": "~2",        
         "php": ">=5.5",
         "contao/core": ">=3.4"
     },    
@@ -36,7 +34,7 @@
     "extra": {
         "contao": {
             "sources": {
-                "contao": "system/modules/folder-gallery"
+                "contao": "system/modules/folder_gallery"
             }
         }
     },
