@@ -1,5 +1,5 @@
 
-<?php $GLOBALS['TL_CSS'][] = "/system/modules/folder-gallery/assets/folder-gallery.css|screen"; ?>
+<?php $GLOBALS['TL_CSS'][] = "/system/modules/folder_gallery/assets/folder-gallery.css|screen"; ?>
 
 <div class="folder_gallery mod_folder_gallery">
     <?php echo $this->content; ?>
