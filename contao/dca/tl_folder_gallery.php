@@ -13,170 +13,138 @@
  * @filesource
  */
 
-$GLOBALS['TL_DCA']['tl_folder_gallery'] = array(
+$GLOBALS['TL_DCA']['tl_folder_gallery'] = [
 
 // Config
-    'config' => array
-    (
+    'config' => [
         'dataContainer'               => 'Table',
         'closed'                      => true,
         'notEditable'                 => false,
         'ptable'                      => 'tl_folder_gallery_category',
-        'onload_callback' => array
-        (
-            array('tl_folder_gallery', 'restrictToGalleryFolder')
-        ),
-        'sql' => array(
-            'keys' => array
-            (
-                'id'  => 'primary',
-                'pid' => 'index'
-            )
-        )
-    ),
+        'onload_callback' => [
+            ['tl_folder_gallery', 'restrictToGalleryFolder']
+        ],
+        'sql' => [
+            'keys' => ['id'  => 'primary', 'pid' => 'index']
+        ]
+    ],
 
 
 // List
-    'list' => array
+    'list' => [
     (
-        'sorting' => array
-        (
+        'sorting' => [
             'mode'                    => 2,
-            'fields'                  => array('datim DESC'),
+            'fields'                  => ['datim DESC'],
             'flag'                    => 1,
             'panelLayout'             => 'search, sort, limit',
-            // 'child_record_callback'   => array('tl_folder_gallery', 'listGalleries')
-        ),
-        'label' => array
-        (
-            'fields'                  => array('poster_image', 'title', 'folder', 'datim', 'details'),
+            // 'child_record_callback'   => ['tl_folder_gallery', 'listGalleries']
+        ],
+        'label' => [
+            'fields'                  => ['poster_image', 'title', 'folder', 'datim', 'details'],
             'showColumns'             => true,
-            'label_callback'          => array('tl_folder_gallery', 'labelCallback')
-        ),
-        'global_operations' => array
-        (
-            'sync' => array
-            (
+            'label_callback'          => ['tl_folder_gallery', 'labelCallback']
+        ],
+        'global_operations' => [
+            'sync' => [
                 'label'               => &$GLOBALS['TL_LANG']['tl_folder_gallery']['sync'],
                 'href'                => 'key=sync',
                 'class'               => 'header_sync',
-            ),
-            'all' => array
-            (
+            ],
+            'all' => [
                 'label'               => &$GLOBALS['TL_LANG']['MSC']['all'],
                 'href'                => 'act=select',
                 'class'               => 'header_edit_all',
                 'attributes'          => 'onclick="Backend.getScrollOffset()" accesskey="e"'
-            ),
-
-        ),
-        'operations' => array
-        (
-            'edit' => array
-            (
+            ],
+        ],
+        'operations' => [
+            'edit' => [
                 'label'               => &$GLOBALS['TL_LANG']['tl_folder_gallery']['edit'],
                 'href'                => 'act=edit',
                 'icon'                => 'edit.gif',
                 'attributes'          => 'class="contextmenu"'
-            ),
-        )
-
-    ),
-
-
+            ],
+        ]
+    ],
 
     // Palettes
-    'palettes' => array
-    (
+    'palettes' => [
         'default'                     => '{title_legend}, folder, title, alias, datim, details, poster_image'
-    ),
+    ],
 
     // Fields
-    'fields' => array
-    (
-        'id' => array
-        (
+    'fields' => [
+        'id' => [
             'sql'                     => "int(10) unsigned NOT NULL auto_increment"
-        ),
-        'pid' => array
-        (
+        ],
+        'pid' => [
             'foreignKey'              => 'tl_folder_gallery_category.title',
             'sql'                     => "int(10) unsigned NOT NULL default '0'",
-            'relation'                => array('type'=>'belongsTo', 'load'=>'eager')
-        ),
-        'tstamp' => array
-        (
+            'relation'                => ['type'=>'belongsTo', 'load'=>'eager']
+        ],
+        'tstamp' => [
             'sql'                     => "int(10) unsigned NOT NULL default '0'",
-        ),
-        'folder' => array
-        (
+        ],
+        'folder' => [
             'label'                   => &$GLOBALS['TL_LANG']['tl_folder_gallery']['folder'],
             'inputType'               => 'text',
-            'eval'                    => array('mandatory'=>false, 'readonly' => true, 'tl_class'=>'long', 'disabled' => true),
+            'eval'                    => ['mandatory'=>false, 'readonly' => true, 'tl_class'=>'long', 'disabled' => true],
             'sql'                     => "varchar(255) NOT NULL default ''",
-        ),
-        'uuid' => array
-        (
+        ],
+        'uuid' => [
             'label'                   => &$GLOBALS['TL_LANG']['tl_folder_gallery']['uuid'],
             'sql'                     => "binary(16) NULL",
-        ),
-        'title' => array
-        (
+        ],
+        'title' => [
             'label'                   => $GLOBALS['TL_LANG']['tl_folder_gallery']['title'],
             'exclude'                 => true,
             'search'                  => true,
             'sorting'                 => true,
             'inputType'               => 'text',
-            'eval'                    => array('mandatory'=>true, 'tl_class'=>'long'),
+            'eval'                    => ['mandatory'=>true, 'tl_class'=>'long'],
             'sql'                     => "varchar(255) NOT NULL default ''",
-        ),
-        'alias' => array
-        (
+        ],
+        'alias' => [
             'label'                   => &$GLOBALS['TL_LANG']['tl_folder_gallery']['alias'],
             'exclude'                 => true,
             'search'                  => false,
             'inputType'               => 'text',
-            'eval'                    => array('rgxp'=>'alias', 'unique'=>true, 'maxlength'=>128, 'tl_class'=>'w50'),
-            'save_callback' => array
-            (
-                array('tl_folder_gallery', 'generateAlias')
-            ),
+            'eval'                    => ['rgxp'=>'alias', 'unique'=>true, 'maxlength'=>128, 'tl_class'=>'w50'],
+            'save_callback'           => [['tl_folder_gallery', 'generateAlias']],
             'sql'                     => "varbinary(128) NOT NULL default ''"
-        ),
-        'datim' => array
-        (
+        ],
+        'datim' => [
             'label'                   => $GLOBALS['TL_LANG']['tl_folder_gallery']['datim'],
             'exclude'                 => true,
             'search'                  => false,
             'sorting'                 => true,
             'flag'                    => 8,
             'inputType'               => 'text',
-            'eval'                    => array('mandatory' => true, 'datepicker'=>true, 'rgxp'=>'date', 'tl_class'=>'w50 wizard'),
+            'eval'                    => ['mandatory' => true, 'datepicker'=>true, 'rgxp'=>'date', 'tl_class'=>'w50 wizard'],
             'sql'                     => "varchar(11) NOT NULL default ''"
-        ),
-        'details' => array
-        (
+        ],
+        'details' => [
             'label'                   => &$GLOBALS['TL_LANG']['tl_folder_gallery']['details'],
             'exclude'                 => true,
             'inputType'               => 'textarea',
-            'eval'		              => array('style' => 'height:64px;', 'mandatory'=>false),
+            'eval'		              => ['style' => 'height:64px;', 'mandatory'=>false],
             'sql'                     => "text NULL",
-        ),
-        'poster_image' => array
-        (
+        ],
+        'poster_image' => [
             'label'                   => $GLOBALS['TL_LANG']['tl_folder_gallery']['poster_image'],
             'exclude'                 => true,
             'search'                  => false,
             'sorting'                 => false,
             'flag'                    => 4,
             'inputType'               => 'fileTree',
-            'eval'                    => array('mandatory'=>false, 'fieldType'=>'radio', 'files' => true, 'extensions' => 'png,jpg,jpeg,gif'),
+            'eval'                    => ['mandatory'=>false, 'fieldType'=>'radio', 'files' => true, 'extensions' => 'png,jpg,jpeg,gif'],
             'sql'                     => "binary(16) NULL",
-        ),
+        ],
 
-    ) //fields
+    ] //fields
 
-);
+];
 
 class tl_folder_gallery extends Backend
 {
