@@ -1,4 +1,4 @@
-<?php
+<?php namespace FolderGallery\Models;
 
 /**
  * Contao Open Source CMS
@@ -13,7 +13,8 @@
  * @filesource
  */
 
-class FolderGalleryModel extends \Model {
-    protected static $strTable = 'tl_folder_gallery';
+class FolderGalleryCategoryModel extends \Model
+{
+    protected static $strTable = 'tl_folder_gallery_category';
 
 }

@@ -25,10 +25,15 @@
         "source": "https://github.com/kozi/contao-folder_gallery"
     },
     "require": {
-        "contao-community-alliance/composer-plugin": "~2",        
-        "php": ">=5.5",
-        "contao/core": ">=3.4"
-    },    
+        "contao-community-alliance/composer-plugin": "~2",
+        "contao/core": ">=3.4",
+        "php": ">=5.5"
+    },
+    "autoload": {
+        "psr-0": {
+            "FolderGallery": "src/"
+        }
+    },
     "minimum-stability": "dev",
     "prefer-stable": true,
     "extra": {

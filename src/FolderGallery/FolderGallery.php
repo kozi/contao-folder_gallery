@@ -1,4 +1,4 @@
-<?php
+<?php namespace FolderGallery;
 
 /**
  * Contao Open Source CMS

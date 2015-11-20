@@ -1,23 +1,29 @@
 <?php
 	
-class FolderGalleryRunonceJob extends Controller {
+class FolderGalleryRunonceJob extends Controller
+{
 
-	public function __construct() {
+	public function __construct()
+	{
 		parent::__construct();
 		$this->import('Database');
 	}
 	 
-	public function run() {
+	public function run()
+	{
 
-		if (!$this->Database->tableExists('tl_folder_gallery_category')) {
+		if (!$this->Database->tableExists('tl_folder_gallery_category'))
+		{
 			return false;
 		}
 
-		if (!$this->Database->tableExists('tl_folder_gallery')) {
+		if (!$this->Database->tableExists('tl_folder_gallery'))
+		{
 			return false;
 		}
 
-		if ($this->Database->fieldExists('uuid', 'tl_folder_gallery')) {
+		if ($this->Database->fieldExists('uuid', 'tl_folder_gallery'))
+		{
 			return false;
 		}
 
@@ -51,6 +57,3 @@ class FolderGalleryRunonceJob extends Controller {
 
 $folderGalleryRunonceJob = new FolderGalleryRunonceJob();
 $folderGalleryRunonceJob->run();
-
-
-

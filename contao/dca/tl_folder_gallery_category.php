@@ -115,17 +115,21 @@ $GLOBALS['TL_DCA']['tl_folder_gallery_category'] = array(
 
 );
 
-class tl_folder_gallery_category extends Backend {
-
-    public function __construct() {
+class tl_folder_gallery_category extends Backend
+{
+    public function __construct()
+    {
         parent::__construct();
         $this->import('BackendUser', 'User');
     }
 
-    public function labelCallback($row, $label, DataContainer $dc, $args = null) {
-        if ($args === null) {
+    public function labelCallback($row, $label, DataContainer $dc, $args = null)
+    {
+        if ($args === null)
+        {
             return $label;
         }
+
         $objFile  = \FilesModel::findByUuid($row['root_folder']);
         $args[1]  = ($objFile !== null) ? $objFile->path : $args[1];
         return $args;

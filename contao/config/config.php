@@ -13,13 +13,16 @@
  * @filesource
  */
 
-$GLOBALS['FE_MOD']['miscellaneous']['folder_gallery']        = 'FolderGalleryModule';
+$GLOBALS['FE_MOD']['miscellaneous']['folder_gallery'] = '\FolderGallery\Modules\FolderGalleryModule';
 
-$GLOBALS['BE_MOD']['content']['folder_gallery']              = array(
-            'icon'       => 'system/modules/folder_gallery/assets/pictures.png',
-            'tables'     => array('tl_folder_gallery_category', 'tl_folder_gallery'),
-            'sync'       => array('FolderGallery', 'syncGalleryCategory'),
-);
+$GLOBALS['TL_MODELS']['tl_folder_gallery']            = '\FolderGallery\Models\FolderGalleryModel';
+$GLOBALS['TL_MODELS']['tl_folder_gallery_category']   = '\FolderGallery\Models\FolderGalleryCategoryModel';
+
+$GLOBALS['BE_MOD']['content']['folder_gallery']       = [
+    'icon'       => 'system/modules/folder_gallery/assets/pictures.png',
+    'tables'     => ['tl_folder_gallery_category', 'tl_folder_gallery'],
+    'sync'       => ['\FolderGallery\FolderGallery', 'syncGalleryCategory'],
+];
 
 
 

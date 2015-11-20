@@ -81,17 +81,20 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['folder_gallery_gallery_order'] = arr
     'sql'                     => "varchar(255) NOT NULL default ''",
 );
 
-class tl_content_folder_gallery extends Backend {
-
-    public function getFolderGalleryTemplatesGallery(DataContainer $dc) {
+class tl_content_folder_gallery extends Backend
+{
+    public function getFolderGalleryTemplatesGallery(DataContainer $dc)
+    {
         return Controller::getTemplateGroup('fg_gallery_');
     }
 
-    public function getFolderGalleries(DataContainer $dc) {
+    public function getFolderGalleries(DataContainer $dc)
+    {
         $result = $this->Database->prepare('SELECT * FROM tl_folder_gallery WHERE pid=? ORDER BY title ASC')
             ->execute($dc->activeRecord->folder_gallery_category);
-        $galleries = array();
-        while($result->next()) {
+        $galleries = [];
+        while($result->next())
+        {
             $row            = $result->row();
             $id             = $row['id'];
             $label          = $row['title'].' ('.Date::parse('F Y', $row['datim']).')';

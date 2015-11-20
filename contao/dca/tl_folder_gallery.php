@@ -178,33 +178,31 @@ $GLOBALS['TL_DCA']['tl_folder_gallery'] = array(
 
 );
 
-class tl_folder_gallery extends Backend {
+class tl_folder_gallery extends Backend
+{
     private $root_folder = null;
-
-    public function __construct() {
-        parent::__construct();
-
-    }
 
     public function labelCallback($row, $label, DataContainer $dc, $args = null) {
 
         $poster_path = 'system/modules/folder_gallery/assets/poster_default.png';
         $objFile     = \FilesModel::findByUuid($row['poster_image']);
-        if($objFile !== null) {
+
+        if($objFile !== null)
+        {
             $poster_path = $objFile->path;
         }
 
         $args[0]    = sprintf('<img src="%s">', Image::get($poster_path, 64, 48, 'center_center'));
         $args[1]    = sprintf('%s <br><small>[%s]</small>', $row['title'], $row['alias']);
 
-
-        if ($this->root_folder === null) {
+        if ($this->root_folder === null)
+        {
             $catObj  = \FolderGalleryCategoryModel::findByPk($row['pid']);
             $rootObj = \FilesModel::findByUuid($catObj->root_folder);
             $this->root_folder = $rootObj->path;
         }
-        $args[2]    = str_replace($this->root_folder, '&hellip;', $row['folder']);
 
+        $args[2]    = str_replace($this->root_folder, '&hellip;', $row['folder']);
         $args[3]    = Date::parse('d.m.Y', $row['datim']);
 
         $details    = ($row['details']) ? String::substrHtml($row['details'], 32) : $args[4];
@@ -213,10 +211,12 @@ class tl_folder_gallery extends Backend {
         return $args;
     }
 
-    public function restrictToGalleryFolder(DataContainer $dc) {
+    public function restrictToGalleryFolder(DataContainer $dc)
+    {
         $result = $this->Database->prepare('SELECT tl_files.path AS path FROM tl_files, tl_folder_gallery'.
          ' WHERE tl_files.id = tl_folder_gallery.folder AND tl_folder_gallery.id = ?')->execute($dc->id);
-         if ($result->numRows === 1) {
+         if ($result->numRows === 1)
+         {
             $row  = $result->row();
             $GLOBALS['TL_DCA']['tl_folder_gallery']['fields']['poster_image']['eval']['path'] = $row['path'];
          }
@@ -227,7 +227,8 @@ class tl_folder_gallery extends Backend {
         $autoAlias = false;
 
         // Generate alias if there is none
-        if ($varValue == '') {
+        if ($varValue == '')
+        {
             $autoAlias = true;
             $varValue  = standardize(String::restoreBasicEntities($dc->activeRecord->title));
         }
@@ -236,12 +237,14 @@ class tl_folder_gallery extends Backend {
             ->execute($varValue);
 
         // Check whether the news alias exists
-        if ($objAlias->numRows > 1 && !$autoAlias) {
+        if ($objAlias->numRows > 1 && !$autoAlias)
+        {
             throw new Exception(sprintf($GLOBALS['TL_LANG']['ERR']['aliasExists'], $varValue));
         }
 
         // Add ID to alias
-        if ($objAlias->numRows && $autoAlias) {
+        if ($objAlias->numRows && $autoAlias)
+        {
             $varValue .= '-' . $dc->id;
         }
 
