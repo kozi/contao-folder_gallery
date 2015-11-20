@@ -27,7 +27,7 @@ class FolderGallery extends \System
     public function syncGalleryCategory(\DataContainer $dc)
     {
         // Sync file system
-        Dbafs::syncFiles();
+        \Dbafs::syncFiles();
 
         $this->cleanup();
 
