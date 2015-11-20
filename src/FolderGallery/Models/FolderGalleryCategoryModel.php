@@ -16,5 +16,5 @@
 class FolderGalleryCategoryModel extends \Model
 {
     protected static $strTable = 'tl_folder_gallery_category';
-
 }
+
