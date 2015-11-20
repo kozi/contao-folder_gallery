@@ -75,7 +75,7 @@ class FolderGallery extends \System
         }
         $this->cleanup($existing_galleries);
 
-        \Controller::redirect(Environment::get('script').'?do=folder_gallery&table=tl_folder_gallery&id='.$catObj->id);
+        \Controller::redirect(\Environment::get('script').'?do=folder_gallery&table=tl_folder_gallery&id='.$catObj->id);
     }
 
     private function hasImages($objFile) {

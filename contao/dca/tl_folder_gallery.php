@@ -32,7 +32,6 @@ $GLOBALS['TL_DCA']['tl_folder_gallery'] = [
 
 // List
     'list' => [
-    (
         'sorting' => [
             'mode'                    => 2,
             'fields'                  => ['datim DESC'],
