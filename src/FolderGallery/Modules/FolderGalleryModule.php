@@ -13,7 +13,7 @@
  * @filesource
  */
 
-class FolderGalleryModule extends Module
+class FolderGalleryModule extends \Module
 {
     public static $sorting        = ['title_asc', 'title_desc', 'datim_asc', 'datim_desc', 'rand'];
     private static $fileTypes     = " (tl_files.extension = 'png' OR tl_files.extension = 'jpg' OR tl_files.extension = 'jpeg' OR tl_files.extension = 'gif')";
