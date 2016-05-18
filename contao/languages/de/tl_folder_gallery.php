@@ -17,6 +17,7 @@
 $GLOBALS['TL_LANG']['tl_folder_gallery']['title_legend']  = 'Galerie';
 
 $GLOBALS['TL_LANG']['tl_folder_gallery']['sync']          = array('Synchronisieren', 'Gelöschte Galerien entfernen und neue hinzufügen');
+$GLOBALS['TL_LANG']['tl_folder_gallery']['cleanup']       = array('Aufräumen', 'Aufräumen!');
 
 $GLOBALS['TL_LANG']['tl_folder_gallery']['title']         = array('Titel', 'Name der Galerie');
 $GLOBALS['TL_LANG']['tl_folder_gallery']['folder']        = array('Verzeichnis', 'Verzeichnis');

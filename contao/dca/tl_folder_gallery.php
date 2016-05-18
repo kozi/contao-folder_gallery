@@ -48,7 +48,7 @@ $GLOBALS['TL_DCA']['tl_folder_gallery'] = [
             'cleanup' => [
                 'label'               => &$GLOBALS['TL_LANG']['tl_folder_gallery']['cleanup'],
                 'href'                => 'key=cleanup',
-                'class'               => 'header_cleanup',
+                'class'               => 'header_sync',
             ],
             'sync' => [
                 'label'               => &$GLOBALS['TL_LANG']['tl_folder_gallery']['sync'],
