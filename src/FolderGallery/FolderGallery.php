@@ -26,8 +26,8 @@ class FolderGallery extends \System
 
     public function cleanup(\DataContainer $dc) {
 
-        doCleanup();
-        
+        $this->doCleanup();
+
     }
 
     public function syncGalleryCategory(\DataContainer $dc)
