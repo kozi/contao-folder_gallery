@@ -2,11 +2,11 @@
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2015 Leo Feyer
+ * Copyright (C) 2005-2016 Leo Feyer
  *
  *
  * PHP version 5
- * @copyright  Martin Kozianka 2013-2015 <http://kozianka.de/>
+ * @copyright  Martin Kozianka 2013-2016 <http://kozianka.de/>
  * @author     Martin Kozianka <http://kozianka.de/>
  * @package    folder_gallery
  * @license    LGPL
@@ -45,6 +45,11 @@ $GLOBALS['TL_DCA']['tl_folder_gallery'] = [
             'label_callback'          => ['tl_folder_gallery', 'labelCallback']
         ],
         'global_operations' => [
+            'cleanup' => [
+                'label'               => &$GLOBALS['TL_LANG']['tl_folder_gallery']['cleanup'],
+                'href'                => 'key=cleanup',
+                'class'               => 'header_cleanup',
+            ],
             'sync' => [
                 'label'               => &$GLOBALS['TL_LANG']['tl_folder_gallery']['sync'],
                 'href'                => 'key=sync',

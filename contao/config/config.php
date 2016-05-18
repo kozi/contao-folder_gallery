@@ -2,11 +2,11 @@
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2015 Leo Feyer
+ * Copyright (C) 2005-2016 Leo Feyer
  *
  *
  * PHP version 5
- * @copyright  Martin Kozianka 2013-2015 <http://kozianka.de/>
+ * @copyright  Martin Kozianka 2013-2016 <http://kozianka.de/>
  * @author     Martin Kozianka <http://kozianka.de/>
  * @package    folder_gallery
  * @license    LGPL 
@@ -21,7 +21,8 @@ $GLOBALS['TL_MODELS']['tl_folder_gallery_category']   = '\FolderGallery\Models\F
 $GLOBALS['BE_MOD']['content']['folder_gallery']       = [
     'icon'       => 'system/modules/folder_gallery/assets/pictures.png',
     'tables'     => ['tl_folder_gallery_category', 'tl_folder_gallery'],
-    'sync'       => ['\FolderGallery\FolderGallery', 'syncGalleryCategory'],
+    'sync'       => ['\FolderGallery\FolderGallery',  'syncGalleryCategory'],
+    'cleanup'    => ['\FolderGallery\FolderGallery', 'cleanup'],
 ];
 
 

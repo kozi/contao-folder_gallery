@@ -2,11 +2,11 @@
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2015 Leo Feyer
+ * Copyright (C) 2005-2016 Leo Feyer
  *
  *
  * PHP version 5
- * @copyright  Martin Kozianka 2013-2015 <http://kozianka.de/>
+ * @copyright  Martin Kozianka 2013-2016 <http://kozianka.de/>
  * @author     Martin Kozianka <http://kozianka.de/>
  * @package    folder_gallery
  * @license    LGPL
@@ -24,12 +24,16 @@ class FolderGallery extends \System
         $this->import('Database');
     }
 
-    public function syncGalleryCategory(\DataContainer $dc)
-    {
+    public function cleanup(\DataContainer $dc) {
+
         // Sync file system
         \Dbafs::syncFiles();
 
-        $this->cleanup();
+        doCleanup();
+    }
+
+    public function syncGalleryCategory(\DataContainer $dc)
+    {
 
         $catObj  = FolderGalleryCategoryModel::findByPk($dc->id);
         $rootObj = \FilesModel::findByUuid($catObj->root_folder);
@@ -56,6 +60,7 @@ class FolderGallery extends \System
                 $alias    = standardize(\String::restoreBasicEntities($objSubfiles->name));
                 $objAlias = $this->Database->prepare('SELECT id FROM tl_folder_gallery WHERE alias = ?')
                 ->execute($alias);
+
                 if ($objAlias->numRows === 1)
                 {
                     $alias .= '-' . time();
@@ -110,7 +115,7 @@ class FolderGallery extends \System
         $objChild   = \FilesModel::findMultipleByBasepath($objFile->path);
 
         // Versuche es bei X Bildern die EXIF-Daten auszulesen
-        $tryCount   = 5;
+        $tryCount   = 3;
 
         if ($objChild === null)
         {
@@ -138,7 +143,7 @@ class FolderGallery extends \System
 
     }
 
-    private function cleanup()
+    private function doCleanup()
     {
         // Delete or move galleries
         $categories = [];
