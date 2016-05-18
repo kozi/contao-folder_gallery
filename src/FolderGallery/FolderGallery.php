@@ -26,10 +26,8 @@ class FolderGallery extends \System
 
     public function cleanup(\DataContainer $dc) {
 
-        // Sync file system
-        \Dbafs::syncFiles();
-
         doCleanup();
+        
     }
 
     public function syncGalleryCategory(\DataContainer $dc)
@@ -78,7 +76,7 @@ class FolderGallery extends \System
                 $this->Database->prepare("INSERT INTO tl_folder_gallery %s")->set($gal)->execute();
             }
         }
-        $this->cleanup($existing_galleries);
+        $this->doCleanup($existing_galleries);
 
         \Controller::redirect(\Environment::get('script').'?do=folder_gallery&table=tl_folder_gallery&id='.$catObj->id);
     }

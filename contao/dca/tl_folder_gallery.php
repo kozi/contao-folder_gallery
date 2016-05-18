@@ -150,6 +150,8 @@ $GLOBALS['TL_DCA']['tl_folder_gallery'] = [
 
 ];
 
+use FolderGallery\Models\FolderGalleryCategoryModel;
+
 class tl_folder_gallery extends Backend
 {
     private $root_folder = null;
@@ -169,7 +171,7 @@ class tl_folder_gallery extends Backend
 
         if ($this->root_folder === null)
         {
-            $catObj  = \FolderGalleryCategoryModel::findByPk($row['pid']);
+            $catObj  = FolderGalleryCategoryModel::findByPk($row['pid']);
             $rootObj = \FilesModel::findByUuid($catObj->root_folder);
             $this->root_folder = $rootObj->path;
         }
