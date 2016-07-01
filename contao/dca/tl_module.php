@@ -107,6 +107,8 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['folder_gallery_gallery_order'] = arra
     'sql'                     => "varchar(255) NOT NULL default ''",
 );
 
+use FolderGallery\Modules\FolderGalleryModule;
+
 class tl_module_folder_gallery extends Backend {
 
     public function getFolderGalleryTemplatesCategory(DataContainer $dc) {
