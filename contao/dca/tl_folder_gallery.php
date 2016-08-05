@@ -179,7 +179,7 @@ class tl_folder_gallery extends Backend
         $args[2]    = str_replace($this->root_folder, '&hellip;', $row['folder']);
         $args[3]    = Date::parse('d.m.Y', $row['datim']);
 
-        $details    = ($row['details']) ? String::substrHtml($row['details'], 32) : $args[4];
+        $details    = ($row['details']) ? StringUtil::substrHtml($row['details'], 32) : $args[4];
         $args[4]    = (strlen($row['details']) > 32)? $details.'&hellip;' : $details;
 
         return $args;
@@ -204,7 +204,7 @@ class tl_folder_gallery extends Backend
         if ($varValue == '')
         {
             $autoAlias = true;
-            $varValue  = standardize(String::restoreBasicEntities($dc->activeRecord->title));
+            $varValue  = standardize(StringUtil::restoreBasicEntities($dc->activeRecord->title));
         }
 
         $objAlias = $this->Database->prepare('SELECT id FROM tl_folder_gallery WHERE alias = ?')
