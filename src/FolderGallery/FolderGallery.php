@@ -55,7 +55,7 @@ class FolderGallery extends \System
             }
             else if ($objSubfiles->type === 'folder' && $this->hasImages($objSubfiles))
             {
-                $alias    = standardize(\String::restoreBasicEntities($objSubfiles->name));
+                $alias    = standardize(\StringUtil::restoreBasicEntities($objSubfiles->name));
                 $objAlias = $this->Database->prepare('SELECT id FROM tl_folder_gallery WHERE alias = ?')
                 ->execute($alias);
 
